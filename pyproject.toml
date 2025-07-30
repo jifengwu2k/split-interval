@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "split-interval"
-version = "0.1.0a0"
+version = "0.1.0a1"
 description = "A Python function that splits left-closed, right-open intervals into parts relative to a reference interval."
 readme = "README.md"
 requires-python = ">=2"

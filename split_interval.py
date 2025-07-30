@@ -41,7 +41,9 @@ def split_interval(reference, target, comparator=lt):
         raise ValueError('reference interval is empty')
 
     if not comparator(target_start, target_stop):
-        raise ValueError('target interval is empty')
+        target_stop = target_start
+
+    # At this point, comparator(target_start, target_stop) or target_start == target_stop
 
     has_left = False
     has_intersection = False

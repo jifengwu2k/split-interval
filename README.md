@@ -62,6 +62,11 @@ assert split_interval(reference=(5, 10), target=(6, 11)) == (None, (6, 10), (10,
 assert split_interval(reference=(5, 10), target=(10, 11)) == (None, None, (10, 11))
 assert split_interval(reference=(5, 10), target=(11, 12)) == (None, None, (11, 12))
 
+# Empty targets
+assert split_interval(reference=(5, 10), target=(3, 2)) == ((3, 3), None, None)
+assert split_interval(reference=(5, 10), target=(5, 4)) == (None, (5, 5), None)
+assert split_interval(reference=(5, 10), target=(10, 9)) == (None, None, (10, 10))
+
 # Works with any comparable type
 assert split_interval(reference=('b', 'e'), target=('a', 'e')) == (('a', 'b'), ('b', 'e'), None)
 
@@ -83,7 +88,8 @@ assert split_interval(reference=(10, 5), target=(11, 10), comparator=greater_tha
 ## Notes
 
 - The comparator should implement strict ordering (like < rather than <=)
-- Empty intervals (where start >= end with default comparator) will raise ValueError
+- Empty target intervals (`not start < end` with default comparator) will be converted to `[start, start)` (still empty)
+- Empty reference intervals (`not start < end` with default comparator) will raise ValueError
 
 ## Contributing
 
